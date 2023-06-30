@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopmates-web
+  namespace: devops-nhattien
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopmates-web
+  template:
+    metadata:
+      labels:
+        app: shopmates-web
+    spec:
+      imagePullSecrets:
+        - name: devops-nhattien
+      containers:
+        - name: web-app
+          image: artifactory.devops-nhattien.asia:26855/docker-local/web/shopmates/development:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+          volumeMounts:
+            - name: user-content
+              mountPath: /app/wwwroot/user-content
+      volumes:
+        - name: user-content
+          hostPath:
+            path: /home/axyres/kubernetes/volume/shopmates
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopmates-web-service
+spec:
+  selector:
+    app: shopmates-web
+  ports:
+    - name: web-app
+      targetPort: 80
+      port: 80
+      nodePort: 30180
+  type: NodePort

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopmates-api
+  namespace: devops-nhattien
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopmates-api
+  template:
+    metadata:
+      labels:
+        app: shopmates-api
+    spec:
+      imagePullSecrets:
+        - name: devops-nhattien
+      containers:
+        - name: web-api
+          image: artifactory.devops-nhattien.asia:26855/docker-local/api/shopmates/development:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+          volumeMounts:
+            - name: user-content
+              mountPath: /app/wwwroot/user-content
+      volumes:
+        - name: user-content
+          persistentVolumeClaim:
+            claimName: user-content-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopmates-api-service
+spec:
+  selector:
+    app: shopmates-api
+  ports:
+    - name: web-api
+      targetPort: 80
+      port: 80
+      nodePort: 30182
+  type: NodePort
