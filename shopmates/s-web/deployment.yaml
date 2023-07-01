@@ -28,9 +28,8 @@ spec:
               mountPath: /app/wwwroot/user-content
       volumes:
         - name: user-content
-          hostPath:
-            path: /home/axyres/kubernetes/volume/shopmates
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: pvc-shopmates-web
 ---
 apiVersion: v1
 kind: Service

@@ -29,7 +29,7 @@ spec:
       volumes:
         - name: user-content
           persistentVolumeClaim:
-            claimName: user-content-pvc
+            claimName: pvc-shopmates-api
 ---
 apiVersion: v1
 kind: Service

@@ -30,7 +30,7 @@ spec:
       volumes:
         - name: user-content
           persistentVolumeClaim:
-            claimName: user-content-pvc
+            claimName: pvc-shopmates-admin
 ---
 apiVersion: v1
 kind: Service
