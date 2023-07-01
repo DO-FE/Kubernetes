@@ -21,7 +21,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-shopmates-web
+  name: pvc-shopmates-api
 spec:
   accessModes:
     - ReadWriteOnce
@@ -30,3 +30,6 @@ spec:
     requests:
       storage: 5Gi
   volumeName: pv-shopmates-api
+  selector:
+    matchLabels:
+      environment: dev

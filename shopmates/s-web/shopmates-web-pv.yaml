@@ -30,3 +30,6 @@ spec:
     requests:
       storage: 5Gi
   volumeName: pv-shopmates-web
+  selector:
+    matchLabels:
+      environment: dev
