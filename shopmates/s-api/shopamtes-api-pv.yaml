@@ -14,14 +14,17 @@ spec:
   mountOptions:
     - hard
     - nfsvers=4.1
+  storageClassName: ""
   nfs:
-    path: /home/axyres/kubernetes/volume/shopmates
+    path: /var/kubernetes/volume/shopmates
     server: 192.168.49.1
+  
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-shopmates-api
+  namespace: devops-nhattien
 spec:
   accessModes:
     - ReadWriteOnce
@@ -30,6 +33,7 @@ spec:
     requests:
       storage: 5Gi
   volumeName: pv-shopmates-api
+  storageClassName: ""
   selector:
     matchLabels:
       environment: dev

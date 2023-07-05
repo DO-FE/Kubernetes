@@ -1,5 +1,9 @@
-kubectl apply -f s-api/deployment.yaml
+kubectl config set-context --current --namespace=devops-nhattien
+kubectl apply -f /home/axyres/kubernetes/shopmates/s-api/deployment.yaml
+kubectl apply -f /home/axyres/kubernetes/shopmates/s-api/shopamtes-api-pv.yaml
 sleep 10
-kubectl apply -f s-web/deployment.yaml
+kubectl apply -f /home/axyres/kubernetes/shopmates/s-web/deployment.yaml
+kubectl apply -f /home/axyres/kubernetes/shopmates/s-web/shopmates-web-pv.yaml
 sleep 10
-kubectl apply -f s-admin/deployment.yaml
+kubectl apply -f /home/axyres/kubernetes/shopmates/s-admin/deployment.yaml
+kubectl apply -f /home/axyres/kubernetes/shopmates/s-admin/shopmates-admin-pv.yaml
