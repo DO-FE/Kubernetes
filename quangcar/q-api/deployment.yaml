@@ -16,7 +16,7 @@ spec:
       imagePullSecrets:
         - name: devops-nhattien
       containers:
-        - name: web-api
+        - name: quangcar-web-api
           image: artifactory.devops-nhattien.asia:26855/docker-local/api/quangcar/development:latest
           ports:
             - containerPort: 80
@@ -40,7 +40,7 @@ spec:
   selector:
     app: quangcar-api
   ports:
-    - name: web-api
+    - name: quangcar-web-api
       targetPort: 80
       port: 80
       nodePort: 30921
