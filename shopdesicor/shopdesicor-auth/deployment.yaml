@@ -23,14 +23,14 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
-          volumeMounts:
-            - name: app
-              mountPath: /app/
+#          volumeMounts:
+#            - name: app
+#              mountPath: /app/
 
-      volumes:
-        - name: app
-          persistentVolumeClaim:
-            claimName: pvc-shopdesicor-auth
+#      volumes:
+#        - name: app
+#          persistentVolumeClaim:
+#            claimName: pvc-shopdesicor-auth
 ---
 apiVersion: v1
 kind: Service
