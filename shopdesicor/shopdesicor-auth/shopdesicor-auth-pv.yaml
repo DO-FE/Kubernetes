@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-shopdesicor-auth
+  namespace: devops-nhattien
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: slow
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: /var/kubernetes/volume/shopdesicor/auth
+    server: 192.168.49.1
+  storageClassName: ""
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-shopdesicor-auth
+  namespace: devops-nhattien
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: pv-shopdesicor-auth
+  selector:
+    matchLabels:
+      environment: dev
+  storageClassName: ""

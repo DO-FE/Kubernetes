@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopdesicor-admin-api
+  namespace: devops-nhattien
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopdesicor-admin-api
+  template:
+    metadata:
+      labels:
+        app: shopdesicor-admin-api
+    spec:
+      imagePullSecrets:
+        - name: devops-nhattien
+      containers:
+        - name: web-admin
+          image: artifactory.devops-nhattien.asia:26855/docker-local/admin/api/shopdesicor/development:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+          volumeMounts:
+            - name: app
+              mountPath: /app/
+
+      volumes:
+        - name: app
+          persistentVolumeClaim:
+            claimName: pvc-shopdesicor-admin-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopdesicor-admin-api-service
+  namespace: devops-nhattien
+spec:
+  selector:
+    app: shopdesicor-admin-api
+  ports:
+    - name: web-admin
+      targetPort: 80
+      port: 80
+      nodePort: 30642
+  type: NodePort
