@@ -16,7 +16,7 @@ spec:
       imagePullSecrets:
         - name: devops-nhattien
       containers:
-        - name: web-admin
+        - name: shopdesicor-auth
           image: artifactory.devops-nhattien.asia:26855/docker-local/auth/server/shopdesicor/development:latest
           ports:
             - containerPort: 80
