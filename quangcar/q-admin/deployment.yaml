@@ -29,7 +29,7 @@ spec:
       volumes:
         - name: user-content
           persistentVolumeClaim:
-            claimName: pv-quangcar
+            claimName: pvc-quangcar-api
 ---
 apiVersion: v1
 kind: Service
