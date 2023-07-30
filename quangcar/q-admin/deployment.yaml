@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quangcar-api
+  name: quangcar-admin
   namespace: devops-nhattien
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: quangcar-api
+      app: quangcar-admin
   template:
     metadata:
       labels:
-        app: quangcar-api
+        app: quangcar-admin
     spec:
       imagePullSecrets:
         - name: devops-nhattien
       containers:
-        - name: quangcar-web-api
-          image: artifactory.devops-nhattien.asia:26855/docker-local/quangcar/api/development:latest
+        - name: quangcar-web-admin
+          image: artifactory.devops-nhattien.asia:26855/docker-local/quangcar/admin/development:latest
           ports:
             - containerPort: 80
           env:
@@ -29,19 +29,19 @@ spec:
       volumes:
         - name: user-content
           persistentVolumeClaim:
-            claimName: pvc-quangcar
+            claimName: pv-quangcar
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: quangcar-api-service
+  name: quangcar-admin-service
   namespace: devops-nhattien
 spec:
   selector:
-    app: quangcar-api
+    app: quangcar-admin
   ports:
-    - name: quangcar-web-api
+    - name: quangcar-web-admin
       targetPort: 80
       port: 80
-      nodePort: 30921
+      nodePort: 30920
   type: NodePort
