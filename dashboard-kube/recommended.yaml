@@ -80,6 +80,17 @@ type: Opaque
 
 ---
 
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+  annotations:
+    kubernetes.io/service-account.name: "admin-user"   
+type: kubernetes.io/service-account-token 
+
+---
+
 kind: ConfigMap
 apiVersion: v1
 metadata:
