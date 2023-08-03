@@ -19,7 +19,7 @@ spec:
         - name: quangcar-web-api
           image: artifactory.devops-nhattien.asia:26855/docker-local/quangcar/api/development:latest
           ports:
-            - containerPort: 443
+            - containerPort: 80
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Production
@@ -41,7 +41,7 @@ spec:
     app: quangcar-api
   ports:
     - name: quangcar-web-api
-      targetPort: 443
-      port: 443
+      targetPort: 80
+      port: 80
       nodePort: 30921
   type: NodePort
