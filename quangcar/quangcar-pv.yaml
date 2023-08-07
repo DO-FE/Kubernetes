@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-quangcar-api
+  name: pv-quangcar
   namespace: devops-nhattien
 spec:
   capacity:
     storage: 5Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: slow
   mountOptions:
@@ -23,16 +23,16 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-quangcar-api
+  name: pvc-quangcar
   namespace: devops-nhattien
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   volumeMode: Filesystem
   resources:
     requests:
       storage: 5Gi
-  volumeName: pv-quangcar-api
+  volumeName: pv-quangcar
   storageClassName: ""
   selector:
     matchLabels:
